@@ -1,80 +1,76 @@
-```markdown
 # Esports-Stats-Hub 🎮
 
-[![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-8.0-blue)](https://dotnet.microsoft.com/)
-[![Entity Framework Core](https://img.shields.io/badge/EF%20Core-Relational-green)](https://docs.microsoft.com/ef/core/)
+[![Build Status](https://img.shields.io/badge/CI%2FCD-Active-success)](#)
+[![.NET](https://img.shields.io/badge/.NET-8.0-512BD4)](#)
+[![EF Core](https://img.shields.io/badge/EF_Core-Relational-339933)](#)
+[![Agile](https://img.shields.io/badge/Methodology-Agile%2FScrum-blue)](#)
 
-Zaawansowany system backendowy (REST API) oraz panel zarządzania (UI) stworzony w **ASP.NET Core**. Projekt służy do gromadzenia, przetwarzania i analizowania telemetrii oraz statystyk zachowań graczy z meczów e-sportowych.
+An enterprise-grade, N-Tier ASP.NET Core backend and management portal designed to ingest, process, and analyze Counter-Strike match telemetry and behavioral patterns.
 
-Aplikacja jest przystosowana do odbierania sformatowanych danych w postaci JSON z zewnętrznych parserów (wykorzystujących np. narzędzia takie jak `demoinfocs-golang`), a następnie bezpiecznego zapisu tych danych w relacyjnej bazie.
+## Executive Summary
+This project serves as a robust backend infrastructure for e-sports data analytics. It features a RESTful API capable of receiving parsed match logs—integrating seamlessly with upstream extraction tools like the `demoinfocs-golang` parser—a secure Blazor/Razor frontend for data management, and a highly decoupled architecture utilizing Dependency Injection and Custom Middleware.
 
-## Zrealizowane wymagania projektowe (PDI)
+## Agile Project Management & Delivery
+The development lifecycle is structured into distinct Agile Epics to ensure continuous integration and iterative delivery:
 
-Projekt zostanie zaprojektowany tak, aby zaprezentować kompleksową wiedzę z zakresu tworzenia aplikacji webowych w technologii ASP.NET:
+*   **Epic 1: Foundation & Data Access** - Repository setup, Dependency Injection configuration, and Entity Framework Core migrations.
+*   **Epic 2: Quality Assurance & Middleware** - Data validation pipelines and custom HTTP request middleware.
+*   **Epic 3: REST API Implementation** - Development of decoupled endpoints for Match and Player telemetry (CRUD).
+*   **Epic 4: Security & Identity** - JWT/Cookie authentication and RBAC authorization policies.
+*   **Epic 5: Management Portal** - Razor/Blazor interactive frontend for data visualization.
 
--  **Pełen zestaw operacji REST (CRUD):** Wdrożone metody `GET`, `POST`, `PUT` oraz `DELETE` do zarządzania zasobami (np. meczami, statystykami graczy).
--  **Walidacja danych:** Restrykcyjna walidacja modeli wejściowych (Data Annotations / FluentValidation) zapobiegająca zapisowi niepoprawnych logów.
--  **Dependency Injection (DI):** Pełne wykorzystanie wbudowanego kontenera IoC do wstrzykiwania serwisów, logiki biznesowej i kontekstu bazy danych.
--  **Custom Middleware:** Autorska warstwa w potoku żądań HTTP (np. do globalnej obsługi błędów lub logowania czasu przetwarzania zapytań API).
--  **Baza Danych (Entity Framework Core):** Relacyjna struktura bazy danych obsługiwana przez system ORM z wykorzystaniem migracji (Code-First).
--  **Uwierzytelnianie i Autoryzacja:** Zabezpieczenie modyfikujących endpointów oraz widoków przed nieautoryzowanym dostępem.
--  **Interfejs Użytkownika:** Frontendowa warstwa prezentacji danych stworzona przy użyciu technologii **Razor / Blazor**, pozwalająca na graficzne przeglądanie statystyk.
+## Architecture & Tech Stack
+*   **Framework**: ASP.NET Core Web API & Blazor/Razor Pages
+*   **Persistence**: Entity Framework Core (Code-First approach)
+*   **Database**: SQLite (Dev/Test) / SQL Server (Prod)
+*   **DevOps/Deployment**: Container-ready architecture (Docker), designed for CI/CD pipeline integration (GitHub Actions/Azure DevOps).
+*   **Telemetry Pipeline**: Designed to ingest JSON payloads containing structured behavioral data and match events.
 
-## 🛠️ Technologie
+## Requirement Traceability Matrix
+This repository strictly adheres to the defined technical specifications:
+- [ ] **RESTful Operations**: `GET`, `POST`, `PUT`, `DELETE` fully implemented for core domain entities.
+- [ ] **Data Validation**: FluentValidation / DataAnnotations ensuring payload integrity.
+- [ ] **Dependency Injection**: Services and repositories registered via the built-in IoC container.
+- [ ] **Middleware**: Custom request pipeline interception for error handling and logging.
+- [ ] **Entity Framework**: Relational data modeling with migrations.
+- [ ] **Authentication**: Secure endpoints requiring verified identity.
+- [ ] **Views**: Razor/Blazor UI implemented for frontend interactions.
 
-* **Język:** C# 
-* **Framework:** ASP.NET Core Web API / Razor Pages / Blazor
-* **ORM:** Entity Framework Core
-* **Baza danych:** SQLite (środowisko deweloperskie) / SQL Server (produkcja)
-* **Architektura:** N-Tier / Clean Architecture (podział na modele, kontrolery i serwisy)
+## 📡 API Specification
 
-## 📡 Przykładowe Endpointy API
+| Method | Endpoint | Description | Auth Required |
+|--------|----------|-------------|---------------|
+| `GET`  | `/api/matches` | Retrieves paginated match history. | No |
+| `GET`  | `/api/matches/{id}` | Fetches granular behavioral stats for a specific match. | No |
+| `POST` | `/api/matches` | Ingests a new parsed CS demo JSON payload. | Yes |
+| `PUT`  | `/api/matches/{id}` | Updates metadata, tags, or analyst notes. | Yes |
+| `DELETE`| `/api/matches/{id}` | Purges corrupted or anomalous match records. | Yes |
 
-Aplikacja udostępnia zasoby pod następującymi adresami:
+## 🚀 CI/CD & Local Provisioning
 
-| Metoda | Endpoint | Opis | Autoryzacja |
-|--------|----------|------|-------------|
-| `GET`  | `/api/matches` | Pobiera listę rozegranych meczów | ❌ |
-| `GET`  | `/api/matches/{id}` | Pobiera szczegółowe dane konkretnego meczu | ❌ |
-| `POST` | `/api/matches` | Dodaje nowy mecz (przyjmuje JSON z parsera) | 🔒 Wymagana |
-| `PUT`  | `/api/matches/{id}` | Aktualizuje dane/notatki o meczu | 🔒 Wymagana |
-| `DELETE`| `/api/matches/{id}` | Usuwa uszkodzone lub testowe logi meczowe | 🔒 Wymagana |
+### Prerequisites
+* .NET 10.0 SDK
+* SQL Server (or SQLite configured in `appsettings.json`)
 
-## ⚙️ Uruchomienie lokalne
-
-1. Sklonuj repozytorium:
+### Environment Setup
+1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/TwojNick/Esports-Stats-Hub.git](https://github.com/TwojNick/Esports-Stats-Hub.git)
-   
-
-```
- 2. Przejdź do katalogu projektu:
-   ```bash
+   git clone [https://github.com/YourUsername/Esports-Stats-Hub.git](https://github.com/YourUsername/Esports-Stats-Hub.git)
    cd Esports-Stats-Hub
-   
-   
-   ```
 ```
-3. Przywróć pakiety NuGet:
+ 2. **Restore dependencies:**
    ```bash
    dotnet restore
-
-```
- 4. Zaktualizuj bazę danych (uruchomienie migracji EF Core):
+   
+   ```
+ 3. **Apply Database Migrations:**
    ```bash
    dotnet ef database update
    
    ```
- 5. Uruchom aplikację:
+ 4. **Run the Application:**
    ```bash
    dotnet run
    
-   
    ```
-```
-6. Przejdź pod adres `https://localhost:xxxx` w przeglądarce, aby otworzyć interfejs UI, lub `https://localhost:xxxx/swagger`, aby przetestować API.
-
-```
-```
-
 ```
