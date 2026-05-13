@@ -1,7 +1,7 @@
 # Esports-Stats-Hub 🎮
 
 [![Build Status](https://img.shields.io/badge/CI%2FCD-Active-success)](#)
-[![.NET](https://img.shields.io/badge/.NET-8.0-512BD4)](#)
+[![.NET](https://img.shields.io/badge/.NET-10.0-512BD4)](#)
 [![EF Core](https://img.shields.io/badge/EF_Core-Relational-339933)](#)
 [![Agile](https://img.shields.io/badge/Methodology-Agile%2FScrum-blue)](#)
 
@@ -57,7 +57,7 @@ This repository strictly adheres to the defined technical specifications:
    ```bash
    git clone [https://github.com/YourUsername/Esports-Stats-Hub.git](https://github.com/YourUsername/Esports-Stats-Hub.git)
    cd Esports-Stats-Hub
-```
+   ```
  2. **Restore dependencies:**
    ```bash
    dotnet restore
@@ -73,4 +73,3 @@ This repository strictly adheres to the defined technical specifications:
    dotnet run
    
    ```
-```
