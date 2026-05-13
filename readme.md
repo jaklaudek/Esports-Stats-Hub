@@ -57,6 +57,7 @@ This repository strictly adheres to the defined technical specifications:
    ```bash
 git clone [https://github.com/YourUsername/Esports-Stats-Hub.git](https://github.com/YourUsername/Esports-Stats-Hub.git)
 cd Esports-Stats-Hub
+
    ```
  2. **Restore dependencies:**
    ```bash
