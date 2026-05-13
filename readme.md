@@ -55,22 +55,18 @@ This repository strictly adheres to the defined technical specifications:
 ### Environment Setup
 1. **Clone the repository:**
    ```bash
-git clone [https://github.com/YourUsername/Esports-Stats-Hub.git](https://github.com/YourUsername/Esports-Stats-Hub.git)
-cd Esports-Stats-Hub
-
+   git clone [https://github.com/YourUsername/Esports-Stats-Hub.git](https://github.com/YourUsername/Esports-Stats-Hub.git)
+   cd Esports-Stats-Hub
    ```
  2. **Restore dependencies:**
    ```bash
-dotnet restore
-   
+   dotnet restore
    ```
  3. **Apply Database Migrations:**
    ```bash
-dotnet ef database update
-   
+   dotnet ef database update
    ```
  4. **Run the Application:**
    ```bash
-dotnet run
-   
+   dotnet run
    ```
