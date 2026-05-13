@@ -55,8 +55,8 @@ This repository strictly adheres to the defined technical specifications:
 ### Environment Setup
 1. **Clone the repository:**
 ```bash
-   git clone [https://github.com/jaklaudek/Esports-Stats-Hub.git](https://github.com/YourUsername/Esports-Stats-Hub.git)
-   cd Esports-Stats-Hub
+git clone [https://github.com/jaklaudek/Esports-Stats-Hub.git](https://github.com/YourUsername/Esports-Stats-Hub.git)
+cd Esports-Stats-Hub
    ```
  2. **Restore dependencies:**
    ```bash
